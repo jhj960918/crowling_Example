@@ -116,21 +116,6 @@ for i in range(1,pageNum+1):
 
 print(reallink)
 
- 
-
- 
-
-if plusUrl == '스몰로고맨투맨':
-
-    title = 'small logo sweatshir'
-
-elif plusUrl == '빅로고맨투맨':
-
-    title = 'big logo sweatshir'
-
-elif plusUrl =='스트라이프맨투맨':
-
-    title = 'stripe sweatshir'
 
  
 
@@ -141,7 +126,7 @@ print('title = ' + title)
 n = 1
 
 for i in range(0,len(reallink)):
-    print("씨발련이좃같네")
+    
     urllib.request.urlretrieve( "http:"+reallink[i],"./image/" +title + "("+str(n)+")"+".jpg")
 
     n +=1
