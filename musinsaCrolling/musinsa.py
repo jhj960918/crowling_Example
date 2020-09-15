@@ -4,7 +4,7 @@ from urllib.parse import quote_plus #아스키 코드로 변환해준다
 
 from bs4 import BeautifulSoup
 
-from selenium import webdriver
+from selenium import webdriver //selenium 크롤링 크롬드라이버 
 
 import time
 
