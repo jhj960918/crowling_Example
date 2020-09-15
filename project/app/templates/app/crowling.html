@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+
+<form method="POST" enctype="multipart/form-data" action="{% url 'crowling' %}">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="text" name="search" placeholder="검색어를 입력하세요">
+    <input type="submit" value="submit">
+</form>
+
+<!-- <a href="{{musinsa_image_name}}"></a> -->
+
+{% endblock %}
