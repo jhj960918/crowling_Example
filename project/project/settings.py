@@ -129,6 +129,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MEDIA_URL = '/media/'
 
-LOGOUT_REDIRECT_URL = 'main'
+# LOGOUT_REDIRECT_URL = 'main'
 
-AUTH_USER_MODEL = 'app.CustomUser' # 이프로젝트에서 auth 의 User 모델은 우리가 만든걸로 사용
+# AUTH_USER_MODEL = 'app.CustomUser' # 이프로젝트에서 auth 의 User 모델은 우리가 만든걸로 사용
