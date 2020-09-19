@@ -1,0 +1,29 @@
+{% load static %}
+<DOCTYPE HTML5>
+    <html>
+      <head>
+        <link href="{% static 'app/css/styles2.css' %}" rel="stylesheet" />
+      </head>
+    
+      <body width="100%" height="100%">
+        
+        <form  method="POST" action="{% url 'signin'%}"  class="loginForm">
+          {% csrf_token %}
+          <h2>Login</h2>
+          <div class="idForm">
+            <input type="text" class="id" name="username" placeholder="ID">
+          </div>
+          <div class="passForm">
+            <input type="password" class="pw" name="password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn">
+            LOG IN
+          </button>
+          
+          <div class="bottomText">
+            Don't you have ID? <a href="{% url 'signup'%}">sign up</a>
+          </div>
+        </form>
+        
+      </body>
+    </html>

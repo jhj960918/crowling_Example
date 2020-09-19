@@ -1,0 +1,29 @@
+{% load static %}
+<DOCTYPE HTML5>
+    <html>
+      <head>
+        <link href="{% static 'app/css/styles2.css' %}" rel="stylesheet" />
+      </head>
+    
+      <body width="100%" height="100%">
+        <form method="POST" class="loginForm"  enctype="multipart/form-data">
+          <h2>회원가입</h2>
+          <div>
+                      <!-- <div class="idForm"> -->
+            {% csrf_token %}
+            {{ form.as_p }}
+          </div>
+          
+
+          <button type="submit" class="btn" onclick="button()">
+            Sign up
+          </button>
+          <script>
+              let button = () => {
+                alert('login Button !')
+            }
+          </script>
+         
+        </form>
+      </body>
+    </html>

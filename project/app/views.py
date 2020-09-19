@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import musinsaData
-
+from .models import CustomUser#유저
+from django.contrib.auth import login, authenticate
+from django.contrib import auth
+from .forms import UserForm
 # from django.contrib.auth.models import User
 from django.http import HttpResponse
 from bs4 import BeautifulSoup as bs
@@ -88,5 +91,40 @@ def crowling(request):
     musinsa = musinsaData.objects.all()
     return render(request, 'app/crowling.html',{'musinsa': musinsa } )
             
-   
 
+
+
+def signin(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username = username, password = password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('crowling')
+        else:
+            return render(request, 'app/signin.html')
+    else:
+        return render(request, 'app/signin.html')
+
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = CustomUser.objects.create_user(username=form.cleaned_data['username'],
+            password = form.cleaned_data['password'],
+            name = form.cleaned_data['name'],
+            address = form.cleaned_data['address'],
+            phone_number = form.cleaned_data['phone_number'],
+            gender = form.cleaned_data['gender'])
+            login(request, new_user)
+            return redirect('crowling')
+    else:
+        form = UserForm()
+        return render(request, 'app/signup.html', {'form': form})
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('crowling')

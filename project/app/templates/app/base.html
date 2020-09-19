@@ -26,6 +26,13 @@
 </head>
 
 <body>
+  
+  
+ 
+  
+ 
+  <br>
+  
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" style="background-color: blue;">
@@ -36,12 +43,27 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          <!-- 유저 권한부여 -->
+          {% if user.is_authenticated %}    
           <li class="nav-item">
-            <a class="nav-link" href="/">create</a>
+            <a class="nav-link" href="/">환영합니다 {{user.username}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">none</a>
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
+      
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signin' %}">login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signup' %}">회원가입</a>
+          </li>
+          {% endif %}
+
+
+
+
           <li class="nav-item">
             <a class="nav-link" href="/">none</a>
           </li>
@@ -60,13 +82,7 @@
   {% endblock %}
 
   <!-- Footer -->
-  <footer class="py-5 bg-black">
-    <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
+ 
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'app/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'app/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
