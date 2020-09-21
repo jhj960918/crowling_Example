@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<h1>여기는 장바구니에용</h1>
+{% for c in cart_item %}
+     <br>
+    
+    <!-- <p>{{c.quantity}}</p> -->
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="/media/{{c.product.musinsaImage}}" alt="...">
+            <div class="caption">
+              <h5>상품 이름 : {{c.product.musinName}}</h5>
+              <p>가격 : {{c.product.musinPrice}}</p>
+              
+              <p><a href="{% url 'delete_cart_item' c.product.id %}" class="btn btn-primary" role="button">장바구니 아이템 삭제</a>  </p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    {% endfor %}
+
+{% endblock %}

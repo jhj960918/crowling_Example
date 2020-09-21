@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import musinsaData
+from .models import musinsaData ,CartItem
 from .models import CustomUser#유저
 from django.contrib.auth import login, authenticate
 from django.contrib import auth
@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen,urlretrieve
 from urllib.parse import quote_plus
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def musinsa_Data(searchtitle,detail_url,musinsa_path,musinsa_image_name,M_title,M_price,product_dir):
@@ -86,13 +87,9 @@ def crowling(request):
             if n > crawl_num:
                 break
     
-
-
-    musinsa = musinsaData.objects.all()
+    musinsa = musinsaData.objects.all().order_by('-id')
     return render(request, 'app/crowling.html',{'musinsa': musinsa } )
-            
-
-
+        
 
 def signin(request):
     if request.method == "POST":
@@ -128,3 +125,52 @@ def signup(request):
 def logout(request):
     auth.logout(request)
     return redirect('crowling')
+
+#장바구니 
+def add_cart(request, product_pk):
+	# 상품을 담기 위해 해당 상품 객체를 product 변수에 할당
+    product = musinsaData.objects.get(pk=product_pk)
+
+    try:
+    	# 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
+        cart = CartItem.objects.get(product__id=product.pk, user__id=request.user.pk)
+        if cart:
+            if cart.product.musinName == product.musinName:
+                cart.quantity += 1
+                cart.save()
+    except CartItem.DoesNotExist:
+        user = CustomUser.objects.get(pk=request.user.pk)
+        cart = CartItem(
+            user=user,
+            product=product,
+            quantity=1,
+        )
+        cart.save()
+    return redirect('my_cart')
+     
+def delete_cart_item(request, product_pk):
+    
+    cart_item = CartItem.objects.filter(product__id=product_pk)
+    product = musinsaData.objects.get(pk=product_pk)
+    cart_item.delete()
+    return redirect('my_cart')
+    
+    
+
+#각 유저의 장바구니
+def my_cart(request):
+    
+    cart_item = CartItem.objects.filter(user__id=request.user.pk)
+    # 장바구니에 담긴 상품의 총 합계 가격
+    # total_price = 0
+    # for loop 를 순회하여 각 상품 * 수량을 total_price 에 담는다
+    # for each_total in cart_item:
+    #     total_price += each_total.product.price * each_total.quantity
+    if cart_item is not None:
+        context = {
+        	# 없으면 없는대로 빈 conext 를 템플릿 변수에서 사용
+            'cart_item': cart_item,
+            # 'total_price': total_price,
+        }
+        return render(request, 'app/cart.html', {'cart_item': cart_item,})
+    return redirect('my_cart')

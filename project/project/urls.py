@@ -25,5 +25,9 @@ urlpatterns = [
     path('signin', app.views.signin, name = 'signin'),
     path('logout', app.views.logout, name = 'logout'),
     path('signup', app.views.signup, name = 'signup'),
+    path('my_cart', app.views.my_cart, name = 'my_cart'),
+    path('add_cart/<int:product_pk>', app.views.add_cart, name='add_cart'),
+    path('delete_cart_item/<int:product_pk>', app.views.delete_cart_item, name='delete_cart_item'),
+    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
