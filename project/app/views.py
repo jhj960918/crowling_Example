@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import musinsaData ,CartItem
+from .models import lotteData ,CartItem
 from .models import CustomUser#유저
 from django.contrib.auth import login, authenticate
 from django.contrib import auth
@@ -12,23 +12,23 @@ from urllib.parse import quote_plus
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
-def musinsa_Data(searchtitle,detail_url,musinsa_path,musinsa_image_name,M_title,M_price,product_dir):
-    musin = musinsaData()
-    musin.search_musinsa =searchtitle
-    musin.musinsaUrl = detail_url
-    image_url = 'images/'+product_dir+musinsa_image_name
-    musin.musinsaImage = image_url
-    musin.musinName = M_title
-    musin.musinPrice = M_price
-    musin.save()
+# def lotte_Data(searchtitle,detail_url,lotte_path,lotte_image_name,M_title,M_price,product_dir):
+#     lotte = lotteData()
+#     lotte.search_lotte =searchtitle
+#     lotte.lotteUrl = detail_url
+#     image_url = 'images/'+product_dir+lotte_image_name
+#     lotte.lotteImage = image_url
+#     lotte.lotteName = M_title
+#     lotte.lottePrice = M_price
+#     lotte.save()
     
 
 def crowling(request):
     if request.method =='POST':
         search_Image = request.POST['search']
         product_dir = str(search_Image+'/')
-        print(product_dir)
-        baseUrl = 'https://store.musinsa.com/app/product/search?search_type=1&q='
+        
+        baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
         counting_search =2
         plusUrl = search_Image
         crawl_num = counting_search
@@ -37,13 +37,10 @@ def crowling(request):
         html = urlopen(url)
 
         soup = bs(html, "html.parser")
-        print(type(html))
-        
-        img = soup.find_all(class_='lazyload lazy')
-        title = soup.find_all(class_='list_info')
-        price = soup.find_all(class_='price')
-        
-        # print(img)
+        print(soup.prettify())
+        title = soup.find_all(class_='srchProductUnitTitle')
+        price = soup.find_all(class_='srchOriginalPrice')
+        img = ''
         n = 1
         urlist=[]
         for i,t,p in zip(img,title,price):#이미지 , 상품 이름 , 상품 가격  변수
@@ -75,20 +72,21 @@ def crowling(request):
             
             imgUrl = i['data-original']#이미지 속성 data-original
             urllist = imgUrl.split('/')
-            musinsa_image_name =str(urllist[6]) +'.jpg'#이미지 이름
-            urlretrieve("http:"+imgUrl,'media/images/'+product_dir + musinsa_image_name)
+            lotte_image_name =str(urllist[6]) +'.jpg'#이미지 이름
+            urlretrieve("http:"+imgUrl,'media/images/'+product_dir + lotte_image_name)
             searchtitle = search_Image+str(n)#검색어 
-            detail_url =  "https://store.musinsa.com/app/product/detail/"+urllist[6]
-            musinsa_path = 'media/images/' #이미지 저장할 경로
-            musinsa_Data(searchtitle,detail_url,musinsa_path,musinsa_image_name,M_title,M_price,product_dir)
+            detail_url =  "https://store.lotte.com/app/product/detail/"+urllist[6]
+            lotte_path = 'media/images/' #이미지 저장할 경로
+            
+            # lotte_Data(searchtitle,detail_url,lotte_path,lotte_image_name,M_title,M_price,product_dir)
             
             
             n += 1
             if n > crawl_num:
                 break
     
-    musinsa = musinsaData.objects.all().order_by('-id')
-    return render(request, 'app/crowling.html',{'musinsa': musinsa } )
+    lotte = lotteData.objects.all().order_by('-id')
+    return render(request, 'app/crowling.html',{'lotte': lotte } )
         
 
 def signin(request):
@@ -129,13 +127,13 @@ def logout(request):
 #장바구니 
 def add_cart(request, product_pk):
 	# 상품을 담기 위해 해당 상품 객체를 product 변수에 할당
-    product = musinsaData.objects.get(pk=product_pk)
+    product = lotteData.objects.get(pk=product_pk)
 
     try:
     	# 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
         cart = CartItem.objects.get(product__id=product.pk, user__id=request.user.pk)
         if cart:
-            if cart.product.musinName == product.musinName:
+            if cart.product.lotteName == product.lotteName:
                 cart.quantity += 1
                 cart.save()
     except CartItem.DoesNotExist:
@@ -151,7 +149,7 @@ def add_cart(request, product_pk):
 def delete_cart_item(request, product_pk):
     
     cart_item = CartItem.objects.filter(product__id=product_pk)
-    product = musinsaData.objects.get(pk=product_pk)
+    product = lotteData.objects.get(pk=product_pk)
     cart_item.delete()
     return redirect('my_cart')
     

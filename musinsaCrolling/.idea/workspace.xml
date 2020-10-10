@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ff25fc8e-7ee4-4994-9225-b2d967a6d7e7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../project/app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../project/app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../project/app/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/migrations/0002_cartitem.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/migrations/0003_auto_20200921_1858.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../project/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/templates/app/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../project/app/templates/app/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/templates/app/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/../project/app/templates/app/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/templates/app/crowling.html" beforeDir="false" afterPath="$PROJECT_DIR$/../project/app/templates/app/crowling.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../project/app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../project/db.sqlite3" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1idaz7ZqQ5mazvZhcvzRAecr3VT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff25fc8e-7ee4-4994-9225-b2d967a6d7e7" name="Default Changelist" comment="" />
+      <created>1602240183873</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602240183873</updated>
+      <workItem from="1602240185943" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

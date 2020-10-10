@@ -4,7 +4,7 @@ from urllib.parse import quote_plus #아스키 코드로 변환해준다
 
 from bs4 import BeautifulSoup
 
-from selenium import webdriver //selenium 크롤링 크롬드라이버 
+from selenium import webdriver #selenium 크롤링 크롬드라이버 
 
 import time
 
@@ -15,7 +15,7 @@ import time
 #해당 페이지를 크롤링 i가 페이지번호
 
 def musinsaCrawling(pageNum):
-
+# https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q=
     baseUrl = 'https://store.musinsa.com/app/product/search?search_type=1&q='
 
     baseUrl1 = '&page='

@@ -13,17 +13,17 @@
 <br>
 
 
-<!-- <a href="{{musinsa_image_name}}"></a> -->
-{%for m in musinsa%}
+<!-- <a href="{{lotte_image_name}}"></a> -->
+{%for m in lotte%}
 <div class="row">
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <img src="/media/{{m.musinsaImage}}" alt="...">
+        <img src="/media/{{m.lotteImage}}" alt="...">
         <div class="caption">
-          <h5>상품 이름 : {{m.musinName}}</h5>
-          <p>가격 : {{m.musinPrice}}</p>
-          <p action="POST" name="searchtitle">검색어 : {{m.search_musinsa}}</p>
-          <p><a href="{% url 'add_cart' m.id %}" class="btn btn-primary" role="button">장바구니담기</a>  <a href="{{m.musinsaUrl}}" class="btn btn-primary" role="button">상품 보러가기</a></p>
+          <h5>상품 이름 : {{m.lotteName}}</h5>
+          <p>가격 : {{m.lottePrice}}</p>
+          <p action="POST" name="searchtitle">검색어 : {{m.search_lotte}}</p>
+          <p><a href="{% url 'add_cart' m.id %}" class="btn btn-primary" role="button">장바구니담기</a>  <a href="{{m.lotteUrl}}" class="btn btn-primary" role="button">상품 보러가기</a></p>
           
         </div>
       </div>
