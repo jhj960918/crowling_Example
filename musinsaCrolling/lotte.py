@@ -41,16 +41,30 @@ def Crawling(pageNum):
     LotteProductList = soup.find(name = 'ul', attrs ={'class':'srchProductList'}) #롯데 상품리스트
     
     Lotteimageurl = LotteProductList.find_all(name = "img") #이미지 URL
-    # Lottetitle = LotteProductList.find_all(name = "p")
-    # Lotteprice = LotteProductList.find_all(name = "p")
+    Lottebuyurl = LotteProductList.find_all(name = "a")
+    # print(Lottebuyurl)
+    Lottetitle = LotteProductList.find_all("div", class_="srchProductUnitTitle")
+    # print(Lottetitle)
+    Lotteprice = LotteProductList.find_all("span", class_="srchCurrentPrice")
+    # print(Lotteprice)
     # print("두번째"+str(Lottetitle))
     # print("두번째"+str(Lotteprice))
 
-    for i in Lotteimageurl: #for i,t,p in zip(Lotteimageurl,Lottetitle,Lotteprice)
-
+    for i,b,t,p in zip(Lotteimageurl,Lottebuyurl,Lottetitle,Lotteprice):
+    # for i in Lotteimageurl:
         try:
             image = i.attrs['src']
             reallink1.append(image)
+            # print(image)
+            buyurl = b.attrs['href']
+            print("구매링크"+str(buyurl))
+            reallink2.append(buyurl)
+            Lottetitle = t.get_text()
+            print(Lottetitle)
+            reallink3.append(Lottetitle)
+            Lotteprice = p.get_text()
+            print(Lotteprice)
+            reallink4.append(Lotteprice)
            
         except:
             continue
@@ -60,7 +74,17 @@ def Crawling(pageNum):
     
 
     driver.close()
-
+#  try:
+#             image = i.attrs['src']
+#             reallink1.append(image)
+#             title = t.get_text()
+#             print(title)
+#             reallink2.append(title)
+#             price= p.get_text()
+#             print(price)
+#             reallink2.append(price)
+#         except:
+#             continue
  
 
  
@@ -70,6 +94,7 @@ plusUrl = "여성 가방"
 reallink1 = []#이미지 저장소
 reallink2 = []#제목 저장소
 reallink3 = []#가격 저장소
+reallink4 = []#구매 페이지 저장소
 
 baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
 
