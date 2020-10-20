@@ -16,13 +16,17 @@ import time
 
 #해당 페이지를 크롤링 i가 페이지번호
 
-def Crawling(pageNum):
+def lotteproduct():
+    reallink1 = []#이미지 저장소
+    reallink2 = []#제목 저장소
+    reallink3 = []#가격 저장소
+    reallink4 = []#구매 페이지 저장소
 
     baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
 
     baseUrl1 = '&page='
-
-    url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(pageNum)
+    plusUrl = "여성 아우터"
+    url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(1)
 
     driver = webdriver.Chrome()
 
@@ -40,31 +44,40 @@ def Crawling(pageNum):
 
     LotteProductList = soup.find(name = 'ul', attrs ={'class':'srchProductList'}) #롯데 상품리스트
     
-    Lotteimageurl = LotteProductList.find_all(name = "img") #이미지 URL
-    Lottebuyurl = LotteProductList.find_all(name = "a")
+    Lotteimageurl = LotteProductList.find_all("div", class_ = "srchThumbImageWrap") #이미지 URL
+   
+    print(str(Lotteimageurl))
+    Lottebuyurl = LotteProductList.find_all("a",class_="srchGridProductUnitLink srchNoProductOrderInfo")
     # print(Lottebuyurl)
-    Lottetitle = LotteProductList.find_all("div", class_="srchProductUnitTitle")
+    Lottetitle = LotteProductList.find_all("div",class_="srchProductUnitTitle")
     # print(Lottetitle)
-    Lotteprice = LotteProductList.find_all("span", class_="srchCurrentPrice")
+    Lotteprice = LotteProductList.find_all("div", class_="srchProductUnitPriceArea")
     # print(Lotteprice)
     # print("두번째"+str(Lottetitle))
     # print("두번째"+str(Lotteprice))
-
+    n=1
     for i,b,t,p in zip(Lotteimageurl,Lottebuyurl,Lottetitle,Lotteprice):
     # for i in Lotteimageurl:
         try:
-            image = i.attrs['src']
-            reallink1.append(image)
-            # print(image)
+            print(str(n)+"번째")
+            n=n+1
+            image = i.select_one("img")
+            image2 = image.attrs['src']
+            print("이미지"+str(image2))
+            reallink1.append(image2)
+           
             buyurl = b.attrs['href']
             print("구매링크"+str(buyurl))
             reallink2.append(buyurl)
+
             Lottetitle = t.get_text()
-            print(Lottetitle)
+            print("상품 이름"+str(Lottetitle))
             reallink3.append(Lottetitle)
-            Lotteprice = p.get_text()
-            print(Lotteprice)
+
+            Lotteprice = p.select_one("span.srchCurrentPrice").get_text()
+            print("가격"+str(Lotteprice))
             reallink4.append(Lotteprice)
+            print()
            
         except:
             continue
@@ -74,6 +87,7 @@ def Crawling(pageNum):
     
 
     driver.close()
+lotteproduct()
 #  try:
 #             image = i.attrs['src']
 #             reallink1.append(image)
@@ -89,46 +103,47 @@ def Crawling(pageNum):
 
  
 
-plusUrl = "여성 가방"
+# plusUrl = "여성 아우터"
 
-reallink1 = []#이미지 저장소
-reallink2 = []#제목 저장소
-reallink3 = []#가격 저장소
-reallink4 = []#구매 페이지 저장소
+# reallink1 = []#이미지 저장소
+# reallink2 = []#제목 저장소
+# reallink3 = []#가격 저장소
+# reallink4 = []#구매 페이지 저장소
 
-baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
+# baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
 
-baseUrl1 = '&page=1'
+# baseUrl1 = '&page=1'
 
-url = baseUrl + quote_plus(plusUrl) + baseUrl1
+# url = baseUrl + quote_plus(plusUrl) + baseUrl1
 
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 
-driver.get(url)
+# driver.get(url)
 
-time.sleep(3) #위에서 불러오고 3초 기다린후에 분석을 시작
+# time.sleep(3) #위에서 불러오고 3초 기다린후에 분석을 시작
 
-pageString = driver.page_source
+# pageString = driver.page_source
 
-soup = BeautifulSoup(pageString, features="html.parser")
+# soup = BeautifulSoup(pageString, features="html.parser")
 
-# pageNum = int((soup.find("span",{"class" : "totalPagingNum"})).text) #페이지 수라 상관없음
+# # pageNum = int((soup.find("span",{"class" : "totalPagingNum"})).text) #페이지 수라 상관없음
 
-# print(pageNum)
+# # print(pageNum)
 
-driver.close()
+# driver.close()
 
-for i in range(1,2):
+# for i in range(1,2):
 
-    Crawling(i)
+#     lotteproduct(i)
 
 
-# print('title = ' + title)
+# # print('title = ' + title)
 
-n = 1
-print(len(reallink1))
-for i in range(0,len(reallink1)):
+# n=1
+# print(len(reallink1))
+# for i in range(0,len(reallink1)):
     
-    urlretrieve(reallink1[i],"./lotte이미지/"+ "("+str(n)+")"+".jpg")
+#     urlretrieve(reallink1[i],"./lotte이미지"+ "("+str(n)+")"+".jpg")
+#     n+=1
 
-    n +=1
+   
